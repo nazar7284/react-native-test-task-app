@@ -4,6 +4,7 @@ import {
 } from '@react-navigation/stack'
 import HomeScreen from './HomeScreen'
 import { RootStackParamList } from './types/root'
+import ActivityDetailsScreen from './ActivityDetailsScreen'
 
 const Stack = createStackNavigator<RootStackParamList>()
 
@@ -21,6 +22,11 @@ const RootRouter = () => {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ActivityDetails"
+        component={ActivityDetailsScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
