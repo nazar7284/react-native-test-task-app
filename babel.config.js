@@ -4,9 +4,12 @@ module.exports = {
     [
       'module-resolver',
       {
-        root: ['./src'],
+        root: ['.'],
         alias: {
           '@/screens': './src/screens',
+          '@/components': './src/components',
+          '@/api': './src/api',
+          '@/assets': './assets',
         },
       },
     ],

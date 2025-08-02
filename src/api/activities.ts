@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { api } from './axios'
 
 export interface Activity {
   id: number
@@ -10,14 +11,13 @@ export interface Activity {
   rating: number
 }
 
-const API_URL = 'https://test-task-server-production-3257.up.railway.app'
-
 const fetchActivities = async (): Promise<Activity[]> => {
-  const res = await fetch(`${API_URL}/activities`)
-  if (!res.ok) {
+  try {
+    const response = await api.get<Activity[]>('/activities')
+    return response.data
+  } catch (error) {
     throw new Error('Failed to fetch activities')
   }
-  return (await res.json()) as Activity[]
 }
 
 export const useActivities = () => {

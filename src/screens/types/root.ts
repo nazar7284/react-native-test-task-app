@@ -1,5 +1,5 @@
 import { StackScreenProps } from '@react-navigation/stack'
-import { Activity } from 'api/activities'
+import { Activity } from '@/api/activities'
 
 export type RootStackParamList = {
   Home: undefined

@@ -1,18 +1,14 @@
 import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native'
-import { RouteProp, useRoute, useNavigation } from '@react-navigation/native'
+import { RouteProp, useRoute } from '@react-navigation/native'
 import { RootStackParamList } from './types/root'
 import { useAddFavorite } from '../api/favorites'
 import MapPin from '../../assets/icons/MapPin.svg'
-import { ArrowLeft } from 'lucide-react-native'
-import { StackNavigationProp } from '@react-navigation/stack'
 import { useState } from 'react'
-
-type DetailsScreenRouteProp = RouteProp<RootStackParamList, 'ActivityDetails'>
-type NavProp = StackNavigationProp<RootStackParamList, 'ActivityDetails'>
+import BackButton from '@/components/BackButton'
 
 const ActivityDetailsScreen = () => {
-  const { params } = useRoute<DetailsScreenRouteProp>()
-  const navigation = useNavigation<NavProp>()
+  const { params } =
+    useRoute<RouteProp<RootStackParamList, 'ActivityDetails'>>()
   const { mutate: addFavorite, isPending } = useAddFavorite()
 
   const [isFavorite, setIsFavorite] = useState(false)
@@ -32,23 +28,7 @@ const ActivityDetailsScreen = () => {
 
   return (
     <View className="flex-1 bg-white">
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-        style={{
-          position: 'absolute',
-          top: 50,
-          left: 20,
-          width: 56,
-          height: 56,
-          borderRadius: 90,
-          backgroundColor: '#F7F7F7',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 10,
-        }}
-      >
-        <ArrowLeft color="black" size={28} />
-      </TouchableOpacity>
+      <BackButton />
       <ScrollView
         className="gap-5"
         contentContainerStyle={{ paddingBottom: 80 }}

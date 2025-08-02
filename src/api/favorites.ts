@@ -1,6 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
-
-const API_URL = 'https://test-task-server-production-3257.up.railway.app'
+import { api } from './axios'
 
 export interface AddFavoritePayload {
   id: number
@@ -13,19 +12,12 @@ export interface AddFavoriteResponse {
 const addFavorite = async (
   payload: AddFavoritePayload,
 ): Promise<AddFavoriteResponse> => {
-  const res = await fetch(`${API_URL}/favorites`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  })
-
-  if (!res.ok) {
+  try {
+    const response = await api.post<AddFavoriteResponse>('/favorites', payload)
+    return response.data
+  } catch (error) {
     throw new Error('Failed to add favorite')
   }
-
-  return (await res.json()) as AddFavoriteResponse
 }
 
 export const useAddFavorite = () => {
